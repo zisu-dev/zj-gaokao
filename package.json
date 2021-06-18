@@ -1,0 +1,35 @@
+{
+  "name": "zj-gaokao",
+  "repository": "git@github.com:zisu-dev/zj-gaokao.git",
+  "author": "thezzisu <thezzisu@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "serve": "vite preview",
+    "build": "vue-tsc --noEmit && vite build",
+    "lint": "eslint --ext .js,.ts,.vue --ignore-path .gitignore .",
+    "dev": "vite"
+  },
+  "dependencies": {
+    "vue": "^3.0.5"
+  },
+  "devDependencies": {
+    "@mdi/js": "^5.9.55",
+    "@typescript-eslint/eslint-plugin": "^4.27.0",
+    "@typescript-eslint/parser": "^4.27.0",
+    "@vitejs/plugin-vue": "^1.2.3",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/compiler-sfc": "^3.0.5",
+    "@vue/eslint-config-prettier": "^6.0.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-vue": "^7.0.0",
+    "prettier": "^2.2.1",
+    "typescript": "^4.3.2",
+    "vite": "^2.3.7",
+    "vite-plugin-windicss": "^1.0.4",
+    "vue-tsc": "^0.0.24",
+    "windicss": "^3.1.3"
+  }
+}
