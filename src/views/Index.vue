@@ -1,18 +1,20 @@
 <template>
   <div>
-    <description />
-    <choose class="mt-4" />
-    <download class="mt-4" />
+    <z-description />
+    <z-filter class="mt-4" />
+    <z-choose class="mt-4" />
+    <z-download class="mt-4" />
   </div>
 </template>
 
 <script lang="ts">
-import Choose from '@/components/Choose.vue'
-import Description from '@/components/Description.vue'
-import Download from '@/components/Download.vue'
+import ZDescription from '@/components/Description.vue'
+import ZFilter from '@/components/Filter.vue'
+import ZChoose from '@/components/Choose.vue'
+import ZDownload from '@/components/Download.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  components: { Choose, Download, Description }
+  components: { ZFilter, ZChoose, ZDownload, ZDescription }
 })
 </script>
