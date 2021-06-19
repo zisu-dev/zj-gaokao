@@ -20,6 +20,7 @@ export function addMajor(major: IMajor): void {
   }
   majorsSet.add(major.id)
   majors.value.push(major)
+  toast.info({ message: `已添加: ${major.schoolName}-${major.majorName} (${majors.value.length}/80)` })
 }
 
 export function removeMajor(id: string): void {

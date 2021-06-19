@@ -1,5 +1,5 @@
 <template>
-  <table>
+  <table class="result-table">
     <thead>
       <tr>
         <th v-for="(value, key) of columns" :key="key">
@@ -9,12 +9,12 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(item, i) in filteredData" :key="i">
-        <td v-for="(value, key) in columns" :key="key">
+      <tr v-for="(item, i) of filteredData" :key="i">
+        <td v-for="(value, key) of columns" :key="key">
           {{ item[key] }}
         </td>
         <td>
-          <div class="btn" @click="add(item)">
+          <div class="btn btn-dense flex justify-center" @click="add(item)">
             <icon :icon="mdiPlus" />
           </div>
         </td>

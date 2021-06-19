@@ -12,9 +12,61 @@
   @apply text-3xl mb-4 border-b-2 border-gray-300;
 }
 
+.result-table {
+  @apply w-full text-center;
+  table-layout: fixed;
+}
+
+.result-table th {
+  @apply text-xs;
+}
+
+.result-table th,
+.result-table td {
+  border: 1px solid black;
+}
+
+.result-table td:nth-of-type(1),
+.result-table th:nth-of-type(1) {
+  width: 3rem;
+}
+.result-table td:nth-of-type(2),
+.result-table th:nth-of-type(2) {
+  width: 6rem;
+}
+.result-table td:nth-of-type(3),
+.result-table th:nth-of-type(3) {
+  width: 2.5rem;
+}
+.result-table td:nth-of-type(5),
+.result-table th:nth-of-type(5) {
+  width: 1rem;
+}
+.result-table td:nth-of-type(6),
+.result-table th:nth-of-type(6),
+.result-table td:nth-of-type(7),
+.result-table th:nth-of-type(7),
+.result-table td:nth-of-type(8),
+.result-table th:nth-of-type(8),
+.result-table td:nth-of-type(9),
+.result-table th:nth-of-type(9),
+.result-table td:nth-of-type(11),
+.result-table th:nth-of-type(11) {
+  width: 3rem;
+}
+
+.result-table td:nth-of-type(13),
+.result-table th:nth-of-type(13) {
+  width: 2rem;
+}
+
 .btn {
   @apply font-bold py-1 px-4 rounded;
   cursor: pointer;
+}
+
+.btn-dense {
+  @apply p-0;
 }
 
 .btn-blue {
