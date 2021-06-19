@@ -2,6 +2,9 @@
   <div class="flex">
     <div class="flex-auto min-h-100vh">
       <app-header />
+      <main class="mt-12 flex-auto p-4">
+        <router-view />
+      </main>
     </div>
   </div>
 </template>

@@ -12,14 +12,17 @@
     "dev": "vite"
   },
   "dependencies": {
-    "vue": "^3.0.5"
+    "izitoast": "^1.4.0",
+    "vue": "^3.0.5",
+    "vue-router": "^4.0.9",
+    "vuedraggable": "^4.0.3",
+    "xlsx": "^0.17.0"
   },
   "devDependencies": {
     "@mdi/js": "^5.9.55",
     "@typescript-eslint/eslint-plugin": "^4.27.0",
     "@typescript-eslint/parser": "^4.27.0",
     "@vitejs/plugin-vue": "^1.2.3",
-    "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.5",
     "@vue/eslint-config-prettier": "^6.0.0",
     "eslint": "^6.7.2",

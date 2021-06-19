@@ -1,5 +1,25 @@
-#app {
-  background-image: url(https://res.zisu.dev/defined/bg_light);
-  background-size: cover;
-  background-position: center;
+.btn {
+  @apply font-bold py-1 px-4 rounded;
+  cursor: pointer;
+}
+
+.btn-blue {
+  @apply bg-blue-500 text-white;
+}
+.btn-blue:hover {
+  @apply bg-blue-700;
+}
+
+.btn-red {
+  @apply bg-red-500 text-white;
+}
+.btn-red:hover {
+  @apply bg-red-700;
+}
+
+.btn-green {
+  @apply bg-green-500 text-white;
+}
+.btn-green:hover {
+  @apply bg-green-700;
 }
