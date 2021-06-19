@@ -1,11 +1,21 @@
+#app {
+  background-image: url(https://res.zisu.dev/img/i.loli.net/f=auto/2021/06/19/kjE65AaoTegrcPD.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
 .app-header {
   backdrop-filter: blur(5px);
+  background-color: #ffffffc0;
 }
 
 .card {
   @apply p-4;
   box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
   border-radius: 4px;
+  backdrop-filter: blur(5px);
+  background-color: #ffffffc0;
 }
 
 .card-header {
@@ -63,6 +73,7 @@
 .btn {
   @apply font-bold py-1 px-4 rounded;
   cursor: pointer;
+  transition: 0.1s;
 }
 
 .btn-dense {
