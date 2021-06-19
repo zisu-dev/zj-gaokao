@@ -40,8 +40,9 @@
       </div>
     </template>
     <div class="flex items-center">
-      <div class="btn btn-green" @click="doFilter">筛选</div>
+      <div class="btn btn-blue" @click="doFilter">筛选</div>
       <div class="btn btn-red" @click="clearFilter">清除</div>
+      <div class="btn btn-green" @click="doExport">导出结果</div>
       <div class="mx-2">筛选结果共{{ filteredData.length }}条</div>
     </div>
     <filter-result />
@@ -50,7 +51,7 @@
 
 <script lang="ts">
 import toast from '@/plugins/toast'
-import { clearFiltered, filteredData, filterWith, IFilterOptions, loadDb, majorsData } from '@/db/data'
+import { clearFiltered, exportFiltered, filteredData, filterWith, IFilterOptions, loadDb, majorsData } from '@/db/data'
 import { defineComponent, ref } from 'vue'
 import FilterResult from '@/components/FilterResult.vue'
 
@@ -96,7 +97,10 @@ export default defineComponent({
     function clearFilter() {
       clearFiltered()
     }
-    return { eSF, school, u985, u211, eMF, major, eAF, filterCode, majorsData, filteredData, onSubmit, doFilter, clearFilter }
+    function doExport() {
+      exportFiltered()
+    }
+    return { eSF, school, u985, u211, eMF, major, eAF, filterCode, majorsData, filteredData, onSubmit, doFilter, clearFilter, doExport }
   }
 })
 </script>

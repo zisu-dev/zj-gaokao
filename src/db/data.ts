@@ -4,6 +4,21 @@ import { u211, u985 } from '@/db/misc'
 import { ref } from 'vue'
 import XLSX from 'xlsx'
 
+export const dataColumns = {
+  schoolId: '院校代码',
+  schoolName: '院校名称',
+  majorId: '专业代码',
+  majorName: '专业名称',
+  schema: '学制',
+  province: '省',
+  city: '城市',
+  trash: '本专科',
+  count: '计划数',
+  requirement: '选考科目要求',
+  charge: '收费标准',
+  remark: '备注'
+}
+
 // 院校代码	院校名称	专业代码	专业名称	学制	省	城市	本专科	计划数	选考科目要求	收费标准	备注
 export interface IMajorData {
   schoolId: string
@@ -113,4 +128,22 @@ export function filterWith(options: IFilterOptions): void {
     filteredData.value = filteredData.value.filter((x) => u211.includes(x.schoolName))
   }
   toast.success({ message: `筛选出了${filteredData.value.length}条记录` })
+}
+
+export function exportFiltered() {
+  const keys = Object.keys(dataColumns)
+  const wb = XLSX.utils.book_new()
+  const ws = XLSX.utils.json_to_sheet(
+    [
+      //
+      dataColumns,
+      ...filteredData.value
+    ],
+    {
+      header: keys,
+      skipHeader: true
+    }
+  )
+  XLSX.utils.book_append_sheet(wb, ws, '筛选结果')
+  XLSX.writeFile(wb, '筛选结果导出.xlsx')
 }
