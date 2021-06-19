@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1 class="text-xl">步骤2: 下载导入表</h1>
+  <div class="card">
+    <div class="card-header">步骤2: 下载导入表</div>
     <p class="mt-1">
       <span class="btn btn-blue" @click="onDownloadExportSheet">下载</span>
     </p>

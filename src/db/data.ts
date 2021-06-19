@@ -2,6 +2,7 @@ import toast from '@/plugins/toast'
 import { wait } from '@/utils/async'
 import { ref } from 'vue'
 import XLSX from 'xlsx'
+import { u211, u985 } from './misc'
 
 // 院校代码	院校名称	专业代码	专业名称	学制	省	城市	本专科	计划数	选考科目要求	收费标准	备注
 export interface IMajorData {
@@ -21,6 +22,17 @@ export interface IMajorData {
 
 export const majorsData = ref<IMajorData[]>([])
 export const filteredData = ref<IMajorData[]>([])
+
+// Load data
+;(function () {
+  const str = localStorage.getItem('majorsData')
+  if (!str) return
+  try {
+    majorsData.value = JSON.parse(str)
+  } catch (e) {
+    localStorage.removeItem('majorsData')
+  }
+})()
 
 function readFile(file: File) {
   return new Promise<ArrayBuffer>((resolve, reject) => {
@@ -58,6 +70,7 @@ export async function loadDb(file: File): Promise<void> {
       remark: obj[i][12]
     })
   }
+  localStorage.setItem('majorsData', JSON.stringify(majorsData.value))
   toast.success({ message: '处理成功' })
 }
 
@@ -67,8 +80,15 @@ export function clearFiltered(): void {
 
 export interface IFilterOptions {
   school?: string
+  u985?: boolean
+  u211?: boolean
   major?: string
   fn?: string
+}
+
+const data = {
+  u985,
+  u211
 }
 
 export function filterWith(options: IFilterOptions): void {
@@ -77,14 +97,20 @@ export function filterWith(options: IFilterOptions): void {
   const major = options.major?.split(',').map((x) => x.trim())
   // eslint-disable-next-line @typescript-eslint/ban-types
   let customFilter: Function | undefined
-  if (fn) customFilter = new Function('item', fn)
+  if (fn) customFilter = new Function('item, data', fn)
   const filter = (item: IMajorData) => {
     if (school && !school.some((x) => item.schoolName.includes(x))) return false
-    if (major && !major.some((x) => item.majorName.includes(x) && !item.remark.includes(x))) return false
-    if (customFilter && !customFilter(item)) return false
+    if (major && !major.some((x) => item.majorName.includes(x) || item.remark.includes(x))) return false
+    if (customFilter && !customFilter(item, data)) return false
     return true
   }
   toast.info({ message: '开始筛选，将卡顿约数秒' })
   filteredData.value = majorsData.value.filter(filter)
+  if (options.u985) {
+    filteredData.value = filteredData.value.filter((x) => u985.includes(x.schoolName))
+  }
+  if (options.u211) {
+    filteredData.value = filteredData.value.filter((x) => u211.includes(x.schoolName))
+  }
   toast.success({ message: `筛选出了${filteredData.value.length}条记录` })
 }

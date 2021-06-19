@@ -1,5 +1,5 @@
 <template>
-  <header class="fixed top-0 z-5 right-0 left-0 h-12 shadow flex flex-row items-center">
+  <header class="app-header fixed top-0 z-5 right-0 left-0 h-12 shadow flex flex-row items-center">
     <div class="px-4">高考志愿填报助手</div>
     <app-spacer />
     <div class="px-4">

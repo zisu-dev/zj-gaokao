@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1 class="text-xl">步骤0: 筛选志愿</h1>
+  <div class="card">
+    <div class="card-header">步骤0: 筛选志愿</div>
     <div>当前数据库中共有{{ majorsData.length }}条记录</div>
     <form @submit.prevent="onSubmit">
       <input id="file_input" type="file" />
@@ -12,6 +12,10 @@
     <input id="cb_1" v-model="eSF" type="checkbox" />
     <template v-if="eSF">
       <div>
+        <label for="cb_1_1">985</label>
+        <input id="cb_1_1" v-model="u985" type="checkbox" />
+        <label for="cb_1_2">211</label>
+        <input id="cb_1_2" v-model="u211" type="checkbox" />
         <label for="t_1">学校名称，半角逗号分隔</label>
         <input id="t_1" v-model="school" type="text" class="border border-dark-50" />
       </div>
@@ -49,7 +53,7 @@ import { clearFiltered, filterWith, IFilterOptions, loadDb, majorsData } from '@
 import { defineComponent, ref } from 'vue'
 import FilterResult from '@/components/FilterResult.vue'
 
-const init = `/* function filter(item) { */
+const init = `/* function filter(item, data) { */
 // write function body here
 
 /* } */
@@ -60,6 +64,8 @@ export default defineComponent({
   setup() {
     const eSF = ref(false)
     const school = ref('')
+    const u985 = ref(false)
+    const u211 = ref(false)
     const eMF = ref(false)
     const major = ref('')
     const eAF = ref(false)
@@ -75,7 +81,11 @@ export default defineComponent({
     }
     function doFilter() {
       const options: IFilterOptions = {}
-      if (eSF.value) options.school = school.value
+      if (eSF.value) {
+        options.school = school.value
+        options.u985 = u985.value
+        options.u211 = u211.value
+      }
       if (eMF.value) options.major = ''
       if (eAF.value) options.fn = filterCode.value
       filterWith(options)
@@ -83,7 +93,7 @@ export default defineComponent({
     function clearFilter() {
       clearFiltered()
     }
-    return { eSF, school, eMF, major, eAF, filterCode, majorsData, onSubmit, doFilter, clearFilter }
+    return { eSF, school, u985, u211, eMF, major, eAF, filterCode, majorsData, onSubmit, doFilter, clearFilter }
   }
 })
 </script>

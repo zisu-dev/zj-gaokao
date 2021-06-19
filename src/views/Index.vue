@@ -1,9 +1,12 @@
 <template>
   <div>
     <z-description />
-    <z-filter class="mt-4" />
-    <z-choose class="mt-4" />
-    <z-download class="mt-4" />
+    <hr class="mt-4" />
+    <z-filter />
+    <hr class="mt-4" />
+    <z-choose />
+    <hr class="mt-4" />
+    <z-download />
   </div>
 </template>
 
