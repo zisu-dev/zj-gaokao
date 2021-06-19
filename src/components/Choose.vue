@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-xl">步骤1: 选择志愿</h1>
+    <h1 class="text-xl">步骤1: 选择志愿 ({{ majors.length }}/80)</h1>
     <div class="px-4">
       <div class="mt-1 first-of-type:mt-0 border-b border-dark-50 flex items-center">
         <div class="mx-2">操作</div>
@@ -19,7 +19,7 @@
         </div>
       </template>
     </draggable>
-    <div contenteditable class="border-2 border-black w-full font-mono" @paste.prevent="onPaste">在导出表中选择目标列，在此粘贴</div>
+    <div contenteditable class="border-2 border-black w-full font-mono" @paste.prevent="onPaste">在导出表中选择目标行，在此粘贴</div>
     <div class="flex">
       <div class="btn btn-blue" @click="loadMajors">加载</div>
       <div class="btn btn-green" @click="saveMajors">保存</div>

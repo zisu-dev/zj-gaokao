@@ -1,5 +1,5 @@
 import toast from '@/plugins/toast'
-import { ref } from 'vue'
+import { ref, toRaw } from 'vue'
 import XLSX from 'xlsx'
 
 interface IMajor {
@@ -56,11 +56,17 @@ export function load(name: string): void {
 }
 
 export function exportXls(): void {
+  const first80: Record<string, string>[] = []
+  for (let i = 0; i < 80 && i < majors.value.length; i++) {
+    const { schoolId, schoolName, majorId, majorName } = toRaw(majors.value[i])
+    first80.push({ a: schoolId, b: schoolName, c: majorId, d: majorName })
+  }
   const wb = XLSX.utils.book_new()
   const ws = XLSX.utils.json_to_sheet(
     [
+      //
       { a: '院校代码', b: '院校名称', c: '专业代码', d: '专业名称' },
-      ...majors.value.map((x) => ({ a: x.schoolId, b: x.schoolName, c: x.majorId, d: x.majorName }))
+      ...first80
     ],
     {
       header: ['a', 'b', 'c', 'd'],
