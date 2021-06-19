@@ -28,7 +28,7 @@ import { addMajor } from '@/db'
 import { filteredData, IMajorData } from '@/db/data'
 import { mdiPlus } from '@mdi/js'
 import { defineComponent } from 'vue'
-import Icon from './Icon.vue'
+import Icon from '@/components/Icon.vue'
 
 export default defineComponent({
   components: { Icon },

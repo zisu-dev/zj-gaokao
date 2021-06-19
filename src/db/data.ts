@@ -1,8 +1,8 @@
 import toast from '@/plugins/toast'
 import { wait } from '@/utils/async'
+import { u211, u985 } from '@/db/misc'
 import { ref } from 'vue'
 import XLSX from 'xlsx'
-import { u211, u985 } from './misc'
 
 // 院校代码	院校名称	专业代码	专业名称	学制	省	城市	本专科	计划数	选考科目要求	收费标准	备注
 export interface IMajorData {
