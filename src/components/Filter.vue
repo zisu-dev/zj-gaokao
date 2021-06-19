@@ -86,7 +86,9 @@ export default defineComponent({
         options.u985 = u985.value
         options.u211 = u211.value
       }
-      if (eMF.value) options.major = ''
+      if (eMF.value) {
+        options.major = major.value
+      }
       if (eAF.value) options.fn = filterCode.value
       filterWith(options)
     }
