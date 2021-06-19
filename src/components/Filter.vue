@@ -39,9 +39,10 @@
         <textarea v-model="filterCode" class="font-mono text-xs w-full h-64 p-1 border border-dark-50" />
       </div>
     </template>
-    <div class="flex">
+    <div class="flex items-center">
       <div class="btn btn-green" @click="doFilter">筛选</div>
       <div class="btn btn-red" @click="clearFilter">清除</div>
+      <div class="mx-2">筛选结果共{{ filteredData.length }}条</div>
     </div>
     <filter-result />
   </div>
@@ -49,7 +50,7 @@
 
 <script lang="ts">
 import toast from '@/plugins/toast'
-import { clearFiltered, filterWith, IFilterOptions, loadDb, majorsData } from '@/db/data'
+import { clearFiltered, filteredData, filterWith, IFilterOptions, loadDb, majorsData } from '@/db/data'
 import { defineComponent, ref } from 'vue'
 import FilterResult from '@/components/FilterResult.vue'
 
@@ -95,7 +96,7 @@ export default defineComponent({
     function clearFilter() {
       clearFiltered()
     }
-    return { eSF, school, u985, u211, eMF, major, eAF, filterCode, majorsData, onSubmit, doFilter, clearFilter }
+    return { eSF, school, u985, u211, eMF, major, eAF, filterCode, majorsData, filteredData, onSubmit, doFilter, clearFilter }
   }
 })
 </script>

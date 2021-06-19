@@ -45,48 +45,48 @@
   border: 1px solid black;
 }
 
-.result-table td:nth-of-type(1),
-.result-table th:nth-of-type(1) {
-  width: 3rem;
-}
 .result-table td:nth-of-type(2),
 .result-table th:nth-of-type(2) {
-  width: 6rem;
+  width: 3rem;
 }
 .result-table td:nth-of-type(3),
 .result-table th:nth-of-type(3) {
+  width: 6rem;
+}
+.result-table td:nth-of-type(4),
+.result-table th:nth-of-type(4) {
   width: 2.5rem;
 }
-.result-table td:nth-of-type(5),
-.result-table th:nth-of-type(5) {
+.result-table td:nth-of-type(6),
+.result-table th:nth-of-type(6) {
   width: 1rem;
 }
-.result-table td:nth-of-type(6),
-.result-table th:nth-of-type(6),
 .result-table td:nth-of-type(7),
 .result-table th:nth-of-type(7),
 .result-table td:nth-of-type(8),
 .result-table th:nth-of-type(8),
 .result-table td:nth-of-type(9),
 .result-table th:nth-of-type(9),
-.result-table td:nth-of-type(11),
-.result-table th:nth-of-type(11) {
+.result-table td:nth-of-type(10),
+.result-table th:nth-of-type(10),
+.result-table td:nth-of-type(12),
+.result-table th:nth-of-type(12) {
   width: 3rem;
 }
 
-.result-table td:nth-of-type(13),
-.result-table th:nth-of-type(13) {
+.result-table td:nth-of-type(1),
+.result-table th:nth-of-type(1) {
   width: 2rem;
 }
 
 .btn {
-  @apply font-bold py-1 px-4 rounded;
+  @apply font-bold py-1 px-4 rounded mx-0.5;
   cursor: pointer;
   transition: 0.1s;
 }
 
 .btn-dense {
-  @apply p-0;
+  @apply p-0 m-0;
 }
 
 .btn-blue {

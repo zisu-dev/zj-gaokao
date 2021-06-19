@@ -1,5 +1,5 @@
 import toast from '@/plugins/toast'
-import { ref, toRaw } from 'vue'
+import { ref, toRaw, watch } from 'vue'
 import XLSX from 'xlsx'
 
 interface IMajor {
@@ -10,8 +10,35 @@ interface IMajor {
   majorName: string
 }
 
+const K_AUTOSAVE = 'autosave'
+export const K_NAME_DEFAULT = 'default'
+
 export const majors = ref<IMajor[]>([])
 const majorsSet = new Set<string>()
+
+export const autoSave = ref(!!localStorage.getItem(K_AUTOSAVE))
+
+// Load autosave
+;(function () {
+  if (autoSave.value) {
+    load(K_NAME_DEFAULT)
+  }
+})()
+
+watch(autoSave, () => {
+  if (autoSave.value) save(K_NAME_DEFAULT)
+  localStorage.setItem(K_AUTOSAVE, autoSave.value ? '1' : '')
+})
+
+watch(
+  majors,
+  () => {
+    if (autoSave.value) {
+      save(K_NAME_DEFAULT)
+    }
+  },
+  { deep: true }
+)
 
 export function addMajor(major: IMajor): void {
   if (majorsSet.has(major.id)) {
@@ -30,9 +57,14 @@ export function removeMajor(id: string): void {
   majorsSet.delete(id)
 }
 
+export function clearMajors(): void {
+  majorsSet.clear()
+  majors.value = []
+}
+
 export function save(name: string): void {
   localStorage.setItem('majors-' + name, JSON.stringify(majors.value))
-  toast.success({ message: '保存成功' })
+  toast.success({ message: '志愿信息保存成功' })
 }
 
 export function load(name: string): void {
@@ -49,7 +81,7 @@ export function load(name: string): void {
       majors.value.push(major)
       majorsSet.add(major.id)
     }
-    toast.success({ message: '加载成功' })
+    toast.success({ message: '志愿信息加载成功' })
   } catch (e) {
     toast.error({ message: '发生了错误' })
     localStorage.removeItem('majors-' + name)

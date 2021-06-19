@@ -20,9 +20,16 @@
       </template>
     </draggable>
     <div contenteditable class="border-2 border-black w-full font-mono" @paste.prevent="onPaste">在导出表中选择目标行，在此粘贴</div>
+    <div>
+      <label for="cb_1">自动保存</label>
+      <input id="cb_1" v-model="autoSave" type="checkbox" />
+    </div>
     <div class="flex">
-      <div class="btn btn-blue" @click="loadMajors">加载</div>
-      <div class="btn btn-green" @click="saveMajors">保存</div>
+      <template v-if="!autoSave">
+        <div class="btn btn-blue" @click="loadMajors">加载</div>
+        <div class="btn btn-green" @click="saveMajors">保存</div>
+      </template>
+      <div class="btn btn-red" @click="clear">清空</div>
     </div>
   </div>
 </template>
@@ -32,7 +39,7 @@ import { defineComponent } from 'vue'
 import draggable from 'vuedraggable'
 import Icon from '@/components/Icon.vue'
 import { mdiDelete } from '@mdi/js'
-import { majors, addMajor, removeMajor, save, load } from '@/db'
+import { majors, addMajor, removeMajor, save, load, autoSave, clearMajors, K_NAME_DEFAULT } from '@/db'
 import toast from '@/plugins/toast'
 
 export default defineComponent({
@@ -61,12 +68,15 @@ export default defineComponent({
       }
     }
     function saveMajors() {
-      save('default')
+      save(K_NAME_DEFAULT)
     }
     function loadMajors() {
-      load('default')
+      load(K_NAME_DEFAULT)
     }
-    return { majors, removeMajor, saveMajors, loadMajors, onPaste, mdiDelete }
+    function clear() {
+      clearMajors()
+    }
+    return { majors, removeMajor, saveMajors, loadMajors, clear, onPaste, autoSave, mdiDelete }
   }
 })
 </script>

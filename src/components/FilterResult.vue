@@ -2,21 +2,21 @@
   <table class="result-table">
     <thead>
       <tr>
+        <th>操作</th>
         <th v-for="(value, key) of columns" :key="key">
           {{ value }}
         </th>
-        <th>操作</th>
       </tr>
     </thead>
     <tbody>
       <tr v-for="(item, i) of filteredData" :key="i">
-        <td v-for="(value, key) of columns" :key="key">
-          {{ item[key] }}
-        </td>
         <td>
           <div class="btn btn-dense flex justify-center" @click="add(item)">
             <icon :icon="mdiPlus" />
           </div>
+        </td>
+        <td v-for="(value, key) of columns" :key="key">
+          {{ item[key] }}
         </td>
       </tr>
     </tbody>
