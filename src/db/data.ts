@@ -131,12 +131,13 @@ export function filterWith(options: IFilterOptions): void {
 }
 
 export function exportFiltered(): void {
-  const keys = Object.keys(dataColumns)
   const wb = XLSX.utils.book_new()
+  const header = Object.assign({ 0: '预选志愿序号' }, dataColumns)
+  const keys = Object.keys(header)
   const ws = XLSX.utils.json_to_sheet(
     [
       //
-      dataColumns,
+      header,
       ...filteredData.value
     ],
     {
