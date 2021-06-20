@@ -39,69 +39,18 @@ import { defineComponent } from 'vue'
 import draggable from 'vuedraggable'
 import Icon from '@/components/Icon.vue'
 import { mdiDelete } from '@mdi/js'
-import { majors, addMajor, removeMajor, save, load, autoSave, clearMajors, K_NAME_DEFAULT } from '@/db'
-import toast from '@/plugins/toast'
+import { majors, removeMajor, save, load, autoSave, clearMajors, K_NAME_DEFAULT, importFromPaste } from '@/db'
 
 export default defineComponent({
   components: { draggable, Icon },
   setup() {
-    function onPaste(ev: ClipboardEvent) {
-      const items = ev.clipboardData?.items
-      if (!items) return
-      for (let i = 0; i < items.length; i++) {
-        const item = items[i]
-        if (item.kind === 'string' && item.type === 'text/plain') {
-          item.getAsString((data) => {
-            const cols = data.split('\t').map((x) => x.trim())
-            const schoolId = cols[1]
-            const schoolName = cols[2]
-            const majorId = cols[3]
-            const majorName = cols[4]
-            if (schoolId && schoolName && majorId && majorName) {
-              const id = schoolId + '-' + majorId
-              addMajor({ id, schoolId, schoolName, majorId, majorName })
-            } else {
-              toast.error({ message: '无效格式' })
-            }
-          })
-        }
-      }
-    }
     function saveMajors() {
       save(K_NAME_DEFAULT)
     }
     function loadMajors() {
       load(K_NAME_DEFAULT)
     }
-    function clear() {
-      clearMajors()
-    }
-    return { majors, removeMajor, saveMajors, loadMajors, clear, onPaste, autoSave, mdiDelete }
+    return { majors, removeMajor, saveMajors, loadMajors, clear: clearMajors, onPaste: importFromPaste, autoSave, mdiDelete }
   }
 })
 </script>
-
-<style>
-.button {
-  margin-top: 35px;
-}
-.flip-list-move {
-  transition: transform 0.5s;
-}
-.no-move {
-  transition: transform 0s;
-}
-.ghost {
-  opacity: 0.5;
-  background: #c8ebfb;
-}
-.list-group {
-  min-height: 20px;
-}
-.list-group-item {
-  cursor: move;
-}
-.list-group-item i {
-  cursor: pointer;
-}
-</style>

@@ -1,7 +1,7 @@
 import toast from '@/plugins/toast'
 import { wait } from '@/utils/async'
 import { u211, u985 } from '@/db/misc'
-import { ref } from 'vue'
+import { ref, toRaw } from 'vue'
 import XLSX from 'xlsx'
 
 export const dataColumns = {
@@ -130,6 +130,20 @@ export function filterWith(options: IFilterOptions): void {
   toast.success({ message: `筛选出了${filteredData.value.length}条记录` })
 }
 
+function parseFuckedNumber(str: string) {
+  if (/[0-9]+/.test(str)) return parseInt(str)
+  if (/免学?费/.test(str)) return 0
+  if (str.endsWith('万')) return Math.floor(10000 * parseFloat(str.substr(0, str.length - 1)))
+  return -1 // 见备注
+}
+
+function convertMajorDataToRow(item: IMajorData) {
+  return Object.assign({ 0: '待选' }, item, {
+    count: parseInt(item.count),
+    charge: parseFuckedNumber(item.charge)
+  })
+}
+
 export function exportFiltered(): void {
   const wb = XLSX.utils.book_new()
   const header = Object.assign({ 0: '预选志愿序号' }, dataColumns)
@@ -138,7 +152,7 @@ export function exportFiltered(): void {
     [
       //
       header,
-      ...filteredData.value
+      ...filteredData.value.map((x) => convertMajorDataToRow(toRaw(x)))
     ],
     {
       header: keys,

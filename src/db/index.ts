@@ -109,3 +109,27 @@ export function exportXls(): void {
   XLSX.utils.book_append_sheet(wb, ws, '志愿导入表')
   XLSX.writeFile(wb, '志愿导入表.xls')
 }
+
+export function importFromPaste(ev: ClipboardEvent): void {
+  const items = ev.clipboardData?.items
+  if (!items) return
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i]
+    if (item.kind === 'string' && item.type === 'text/plain') {
+      item.getAsString((data) => {
+        const cols = data.split('\t').map((x) => x.trim())
+        console.log(cols)
+        const schoolId = cols[1]
+        const schoolName = cols[2]
+        const majorId = cols[3]
+        const majorName = cols[4]
+        if (schoolId && schoolName && majorId && majorName) {
+          const id = schoolId + '-' + majorId
+          addMajor({ id, schoolId, schoolName, majorId, majorName })
+        } else {
+          toast.error({ message: '无效格式' })
+        }
+      })
+    }
+  }
+}
