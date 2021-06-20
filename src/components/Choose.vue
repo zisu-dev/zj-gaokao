@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card card-acrylic">
     <div class="card-header">步骤1: 选择志愿 ({{ majors.length }}/80)</div>
     <div class="px-4">
       <div class="mt-1 first-of-type:mt-0 border-b border-dark-50 flex items-center">

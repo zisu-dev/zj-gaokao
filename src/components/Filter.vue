@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card card-acrylic">
     <div class="card-header">步骤0: 筛选志愿</div>
     <div>当前数据库中共有{{ majorsData.length }}条记录</div>
     <form @submit.prevent="onSubmit">

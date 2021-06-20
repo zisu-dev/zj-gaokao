@@ -1,9 +1,7 @@
 <template>
   <z-filter />
-  <hr class="mt-4" />
-  <z-choose />
-  <hr class="mt-4" />
-  <z-download />
+  <z-choose class="mt-4" />
+  <z-download class="mt-4" />
 </template>
 
 <script lang="ts">

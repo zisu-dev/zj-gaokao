@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card card-acrylic">
     <div class="card-header">使用说明</div>
     <p>
       先在考试院官网下载导出志愿表，无需启用宏。<br />

@@ -1,17 +1,13 @@
 <template>
-  <header class="app-header">
+  <header class="app-header card-acrylic">
     <router-link to="/" class="px-4 font-bold">
       高考志愿填报助手
       <span class="text-xs">v{{ version }}</span>
     </router-link>
     <router-link to="/help" class="px-4">使用说明</router-link>
     <router-link to="/sponsor" class="px-4">赞助</router-link>
+    <router-link to="/disclaimer" class="px-4">免责声明</router-link>
     <app-spacer />
-    <div class="px-4">
-      <a href="https://zisu.dev">
-        <img :src="ZisuIcon" width="16" height="16" />
-      </a>
-    </div>
     <div class="px-4">
       <a href="https://github.com/zisu-dev/zj-gaokao">
         <icon :icon="mdiGithub" />
@@ -26,15 +22,13 @@ import AppSpacer from '@/components/AppSpacer.vue'
 import { version } from '@/utils/pkg'
 import { mdiGithub } from '@mdi/js'
 import Icon from '@/components/Icon.vue'
-import ZisuIcon from '@/assets/logo.svg'
 
 export default defineComponent({
   components: { AppSpacer, Icon },
   setup() {
     return {
       version,
-      mdiGithub,
-      ZisuIcon
+      mdiGithub
     }
   }
 })
