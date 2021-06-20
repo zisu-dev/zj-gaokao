@@ -1,6 +1,8 @@
 <template>
   <header class="app-header">
-    <div class="px-4">高考志愿填报助手</div>
+    <router-link to="/" class="px-4 font-bold">高考志愿填报助手</router-link>
+    <router-link to="/help" class="px-4">使用说明</router-link>
+    <router-link to="/sponsor" class="px-4">赞助</router-link>
     <app-spacer />
     <div class="px-4">
       <a href="https://zisu.dev">

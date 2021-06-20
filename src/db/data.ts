@@ -130,7 +130,7 @@ export function filterWith(options: IFilterOptions): void {
   toast.success({ message: `筛选出了${filteredData.value.length}条记录` })
 }
 
-export function exportFiltered() {
+export function exportFiltered(): void {
   const keys = Object.keys(dataColumns)
   const wb = XLSX.utils.book_new()
   const ws = XLSX.utils.json_to_sheet(
