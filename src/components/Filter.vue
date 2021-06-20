@@ -51,27 +51,14 @@
 
 <script lang="ts">
 import toast from '@/plugins/toast'
-import { clearFiltered, exportFiltered, filteredData, filterWith, IFilterOptions, loadDb, majorsData } from '@/db/data'
-import { defineComponent, ref } from 'vue'
+import { filteredData, loadDb, majorsData } from '@/db/data'
+import { defineComponent } from 'vue'
 import FilterResult from '@/components/FilterResult.vue'
-
-const init = `/* function filter(item, data) { */
-// write function body here
-
-/* } */
-`
+import { useFilter } from '@/utils/filter'
 
 export default defineComponent({
   components: { FilterResult },
   setup() {
-    const eSF = ref(false)
-    const school = ref('')
-    const u985 = ref(false)
-    const u211 = ref(false)
-    const eMF = ref(false)
-    const major = ref('')
-    const eAF = ref(false)
-    const filterCode = ref(init)
     function onSubmit() {
       const el = document.getElementById('file_input') as HTMLInputElement
       const file = el.files?.[0]
@@ -81,25 +68,19 @@ export default defineComponent({
       }
       loadDb(file)
     }
-    function doFilter() {
-      const options: IFilterOptions = {}
-      if (eSF.value) {
-        options.school = school.value
-        options.u985 = u985.value
-        options.u211 = u211.value
-      }
-      if (eMF.value) {
-        options.major = major.value
-      }
-      if (eAF.value) options.fn = filterCode.value
-      filterWith(options)
-    }
-    function clearFilter() {
-      clearFiltered()
-    }
-    function doExport() {
-      exportFiltered()
-    }
+    const {
+      enableSchoolFilter: eSF,
+      school,
+      u985,
+      u211,
+      enableMajorFilter: eMF,
+      major,
+      enableAdvancedFilter: eAF,
+      filterCode,
+      doFilter,
+      clearFiltered: clearFilter,
+      exportFiltered: doExport
+    } = useFilter()
     return { eSF, school, u985, u211, eMF, major, eAF, filterCode, majorsData, filteredData, onSubmit, doFilter, clearFilter, doExport }
   }
 })
