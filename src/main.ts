@@ -13,3 +13,8 @@ app.mount('#app')
 if (window.screen.width < 640) {
   toast.warning({ position: 'topCenter', message: '请使用桌面浏览器打开', title: '浏览器建议' })
 }
+
+window.addEventListener('beforeunload', (ev) => {
+  ev.preventDefault()
+  return (ev.returnValue = '请确认志愿已经保存')
+})

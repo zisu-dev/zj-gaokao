@@ -117,3 +117,14 @@ html {
 .btn-green:hover {
   @apply bg-green-700;
 }
+
+.btn-yellow {
+  @apply bg-yellow-500 text-white;
+}
+.btn-yellow:hover {
+  @apply bg-yellow-700;
+}
+
+.paste-input::before {
+  content: '在导出表中选择目标行，在此粘贴';
+}

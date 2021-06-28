@@ -40,14 +40,15 @@ watch(
   { deep: true }
 )
 
-export function addMajor(major: IMajor): void {
+export function addMajor(major: IMajor, slient?: boolean): boolean {
   if (majorsSet.has(major.id)) {
-    toast.info({ message: '勿添加重复专业' })
-    return
+    !slient && toast.info({ message: '勿添加重复专业' })
+    return false
   }
   majorsSet.add(major.id)
   majors.value.push(major)
-  toast.info({ message: `已添加: ${major.schoolName}-${major.majorName} (${majors.value.length}/80)` })
+  !slient && toast.info({ message: `已添加: ${major.schoolName}-${major.majorName} (${majors.value.length}/80)` })
+  return true
 }
 
 export function removeMajor(id: string): void {

@@ -37,17 +37,39 @@ export interface IMajorData {
 
 export const majorsData = ref<IMajorData[]>([])
 export const filteredData = ref<IMajorData[]>([])
+export const featuresData = [
+  '一流大学建设高校',
+  '一流学科建设高校',
+  '省重点建设高校',
+  '入选“2011计划”高校',
+  '省市共建重点高校',
+  '民办',
+  '中外合作办学',
+  '内地与港澳台地区合作办学'
+]
+
+const V = '0.3.0'
 
 // Load data
 ;(function () {
   const str = localStorage.getItem('majorsData')
   if (!str) return
   try {
-    majorsData.value = JSON.parse(str)
+    const result = JSON.parse(str)
+    if (result._v !== V) throw new Error('Version mismatch')
+    majorsData.value = result.majors
   } catch (e) {
     localStorage.removeItem('majorsData')
   }
 })()
+
+function saveData() {
+  const data = {
+    _v: V,
+    majors: majorsData.value
+  }
+  localStorage.setItem('majorsData', JSON.stringify(data))
+}
 
 function readFile(file: File) {
   return new Promise<ArrayBuffer>((resolve, reject) => {
@@ -85,7 +107,7 @@ export async function loadDb(file: File): Promise<void> {
       remark: obj[i][12]
     })
   }
-  localStorage.setItem('majorsData', JSON.stringify(majorsData.value))
+  saveData()
   toast.success({ message: '处理成功' })
 }
 
@@ -97,6 +119,7 @@ export interface IFilterOptions {
   school?: string
   u985?: boolean
   u211?: boolean
+  features?: boolean[]
   major?: string
   fn?: string
 }
@@ -126,6 +149,12 @@ export function filterWith(options: IFilterOptions): void {
   }
   if (options.u211) {
     filteredData.value = filteredData.value.filter((x) => u211.some((y) => x.schoolName.includes(y)))
+  }
+  if (options.features) {
+    for (let i = 0; i < featuresData.length; i++) {
+      if (!options.features[i]) continue
+      filteredData.value = filteredData.value.filter((x) => x.schoolName.includes(featuresData[i]))
+    }
   }
   toast.success({ message: `筛选出了${filteredData.value.length}条记录` })
 }

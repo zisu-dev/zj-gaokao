@@ -19,7 +19,7 @@
         </div>
       </template>
     </draggable>
-    <div contenteditable class="border-2 border-black w-full font-mono" @paste.prevent="onPaste">在导出表中选择目标行，在此粘贴</div>
+    <div contenteditable class="border-2 border-black w-full font-mono paste-input" @paste.prevent="onPaste" />
     <div>
       <label for="cb_1">自动保存</label>
       <input id="cb_1" v-model="autoSave" type="checkbox" />
