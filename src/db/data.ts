@@ -122,10 +122,10 @@ export function filterWith(options: IFilterOptions): void {
   toast.info({ message: '开始筛选，将卡顿约数秒' })
   filteredData.value = majorsData.value.filter(filter)
   if (options.u985) {
-    filteredData.value = filteredData.value.filter((x) => u985.includes(x.schoolName))
+    filteredData.value = filteredData.value.filter((x) => u985.some((y) => x.schoolName.includes(y)))
   }
   if (options.u211) {
-    filteredData.value = filteredData.value.filter((x) => u211.includes(x.schoolName))
+    filteredData.value = filteredData.value.filter((x) => u211.some((y) => x.schoolName.includes(y)))
   }
   toast.success({ message: `筛选出了${filteredData.value.length}条记录` })
 }
