@@ -145,10 +145,10 @@ export function filterWith(options: IFilterOptions): void {
   toast.info({ message: '开始筛选，将卡顿约数秒' })
   filteredData.value = majorsData.value.filter(filter)
   if (options.u985) {
-    filteredData.value = filteredData.value.filter((x) => u985.some((y) => x.schoolName.includes(y)))
+    filteredData.value = filteredData.value.filter((x) => u985.some((y) => x.schoolName.startsWith(y)))
   }
   if (options.u211) {
-    filteredData.value = filteredData.value.filter((x) => u211.some((y) => x.schoolName.includes(y)))
+    filteredData.value = filteredData.value.filter((x) => u211.some((y) => x.schoolName.startsWith(y)))
   }
   if (options.features) {
     for (let i = 0; i < featuresData.length; i++) {
